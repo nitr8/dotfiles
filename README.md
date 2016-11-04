@@ -1,6 +1,6 @@
 # nitr8's dotfiles
 
-![Screenshot of Mathias Bynens shell](https://i.imgur.com/EkEtphC.png)
+![Screenshot of Mathias Bynens shell](https://i.imgur.com/.png)
 
 ## Installation
 
