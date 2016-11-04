@@ -1,6 +1,6 @@
 # nitr8's dotfiles
 
-![Screenshot of Mathias Bynens shell](https://i.imgur.com/.png)
+![Screenshot of Mathias Bynens shell](http://i.imgur.com/ZebT42u.png)
 
 ## Installation
 
@@ -64,7 +64,7 @@ When setting up a new Mac, you may want to set some sensible macOS defaults:
 When setting up a new Mac, you may want to install some common [Homebrew](http://brew.sh/) formulae (after installing Homebrew, of course):
 
 ```bash
-~/dotfiles/brew.sh~/dotfiles/brew.sh
+~/dotfiles/brew.sh
 ```
 
 ## Thanks to…
