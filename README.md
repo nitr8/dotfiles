@@ -70,3 +70,4 @@ When setting up a new Mac, you may want to install some common [Homebrew](http:/
 ## Thanks to…
 
 * [Mathias Bynens](https://mathiasbynens.be/) and his [dotfiles repository](https://github.com/mathiasbynens/dotfiles)
+* [Rob Wilcox](http://budeandbeyond.co.uk/) for all his help in testing / feedback

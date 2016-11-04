@@ -34,6 +34,9 @@ fi;
 # Install `wget` with IRI support.
 brew install wget --with-iri
 
+# Install xquartz
+brew cask install xquartz
+
 # Install RingoJS and Narwhal.
 # Note that the order in which these are installed is important;
 # see http://git.io/brew-narwhal-ringo.
@@ -55,7 +58,7 @@ brew install woff2
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 brew install aircrack-ng
-brew install bfg
+#brew install bfg
 brew install binutils
 brew install binwalk
 brew install cifer
