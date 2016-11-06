@@ -52,5 +52,5 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 # sublime filename – opens a file where filename is the file to be opened
 # sublime foldername – opens a folder where foldername is the folder to be opened
 if [ -d "/Applications/Sublime Text.app" ]; then
-	alias sublime="open -a /Applications/Sublime\ Text.app"
+	alias sl="open -a /Applications/Sublime\ Text.app"
 fi
