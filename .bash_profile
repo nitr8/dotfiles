@@ -46,3 +46,11 @@ complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+
+# Launch Sublime Text 3 from terminal
+# sublime . – opens the current directory in Sublime
+# sublime filename – opens a file where filename is the file to be opened
+# sublime foldername – opens a folder where foldername is the folder to be opened
+if [ -d "/Applications/Sublime Text.app" ]; then
+	alias sublime="open -a /Applications/Sublime\ Text.app"
+fi
