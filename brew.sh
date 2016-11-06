@@ -103,6 +103,7 @@ brew install tree
 brew install vbindiff
 brew install webkit2png
 brew install zopfli
+brew install ngrep
 
 # Remove outdated versions from the cellar.
 brew cleanup
