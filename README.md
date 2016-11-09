@@ -6,6 +6,14 @@
 
 :warning: **Warning:** If you want to give these dotfiles a try, you should first fork this repository, review the code, and remove things you don’t want or need.
 
+### Install Homebrew
+
+The script explains what it will do and then pauses before it does it. 
+
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
 ### Using Git and the bootstrap script
 
 You can clone the repository wherever you want. The bootstrapper script will pull in the latest version and copy the files to your home folder.
