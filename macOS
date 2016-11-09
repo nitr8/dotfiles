@@ -874,10 +874,10 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/nul
 
 if [ -n "${BREW_DEPENDS+set}" ]; then
   echo '$BREW_DEPENDS was set' to $BREW_DEPENDS
-  rm -Rf ~/brew.sh
+  rm -Rf init/
 else
-	echo chmod 755 ~/brew.sh && ~/brew.sh
-	echo rm -Rf ~/brew.sh
+	echo chmod 755 init/brew.sh && init/brew.sh
+	echo rm -Rf init/
 fi
 
 ###############################################################################
