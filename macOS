@@ -869,6 +869,18 @@ defaults write com.apple.menuextra.clock DateFormat -string "EEE h:mm a"
 launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
 ###############################################################################
+# brew.sh dependencies                                                        #
+###############################################################################
+
+if [ -n "${BREW_DEPENDS+set}" ]; then
+  echo '$BREW_DEPENDS was set' to $BREW_DEPENDS
+  rm -Rf ~/brew.sh
+else
+	echo chmod 755 ~/brew.sh && ~/brew.sh
+	echo rm -Rf ~/brew.sh
+fi
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
