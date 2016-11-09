@@ -886,8 +886,7 @@ fi
 
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	"Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
-	"Opera" "Photos" "Safari" "SizeUp" "Spectacle" "SystemUIServer" "Terminal" \
-	"Transmission" "iCal"; do
+	"Opera" "Photos" "Safari" "SystemUIServer" "Terminal" "iCal"; do
 	killall "${app}" &> /dev/null
 	#rm -- "$0"
 done
