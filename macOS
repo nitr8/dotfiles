@@ -959,6 +959,8 @@ defaults write /Library/Preferences/com.apple.security GKAutoRearm -bool false
 defaults write com.apple.dock springboard-columns -int 12
 defaults write com.apple.dock springboard-rows -int 6
 
+#Set clock to 12h
+defaults write com.apple.menuextra.clock DateFormat -string "EEE h:mm a"
 #Revert to default settings with:
 ##defaults delete NSGlobalDomain KeyRepeat
 ##defaults delete NSGlobalDomain InitialKeyRepeat
