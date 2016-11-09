@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+## githib settings
+#GIT_AUTHOR_NAME="Joe Blogs"
+#GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+#git config --global user.name "$GIT_AUTHOR_NAME"
+#GIT_AUTHOR_EMAIL="user@gmail.com"
+#GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+#git config --global user.email "$GIT_AUTHOR_EMAIL"
+
+## system settings
+#export SET_LOCALE='en_GB';
+#export SET_UNITS='Inches';
+#export SET_TIMEZONE='Europe/London';
+#export SLEEP_MODE='disabled';
+#export SSD_TWEAK='disabled';
