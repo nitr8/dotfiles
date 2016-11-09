@@ -853,7 +853,7 @@ defaults write com.microsoft.onenote.mac SendAllTelemetryEnabled -boolean false
 defaults write com.apple.reminders RemindersDebugMenu -boolean true
 
 #Disable Gatekeeper
-defaults write /Library/Preferences/com.apple.security GKAutoRearm -bool false
+##defaults write /Library/Preferences/com.apple.security GKAutoRearm -bool false
 
 #Change the layout (rows and columns) of Launchpad to 12x6
 defaults write com.apple.dock springboard-columns -int 12
@@ -873,7 +873,7 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/nul
 ###############################################################################
 
 if [ -n "${BREW_DEPENDS+set}" ]; then
-  echo '$BREW_DEPENDS was set' to $BREW_DEPENDS
+  #echo '$BREW_DEPENDS was set' to $BREW_DEPENDS
   rm -Rf init/
 else
 	echo chmod 755 init/brew.sh && init/brew.sh
