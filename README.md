@@ -65,10 +65,16 @@ You could also use `~/.extra` to override settings, functions and aliases. It’
 When setting up a new Mac, you may want to set some sensible macOS defaults:
 
 ```bash
-~/dotfiles/.macos
+~/dotfiles/.macos *optional
 ```
 
-### Install Homebrew formulae
+### Install Homebrew *optional
+
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+### Install Homebrew formulae *optional
 
 When setting up a new Mac, you may want to install some common [Homebrew](http://brew.sh/) formulae (after installing Homebrew, of course):
 

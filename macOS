@@ -482,6 +482,12 @@ defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 # Allow hitting the Backspace key to go to the previous page in history
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
 
+# Show the StatusBar
+defaults write com.apple.Safari ShowOverlayStatusBar -bool true
+
+# Set genie effect for minimize windows
+defaults write com.apple.dock mineffect genie
+
 # Hide Safari’s bookmarks bar by default
 defaults write com.apple.Safari ShowFavoritesBar -bool false
 
@@ -810,8 +816,7 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 ###############################################################################
 
 # Install Sublime Text settings
-cp -r init/sublime.settings ~/Library/Application\ Support/Sublime\ Text*/Packages/User/Preferences.sublime-settings 2> /dev/null
-rm -Rf init/
+cp -r init/sublime.settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings 2> /dev/null
 
 ###############################################################################
 # Office 2016                                                                 #
