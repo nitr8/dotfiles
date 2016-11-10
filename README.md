@@ -6,23 +6,14 @@
 
 :warning: **Warning:** If you want to give these dotfiles a try, you should first fork this repository, review the code, and remove things you don’t want or need.
 
-### Install Homebrew
-
-The script explains what it will do and then pauses before it does it. 
-
-```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
 ### Git-free install
 
 To install these dotfiles without Git:
 
 ```bash
-cd; curl -#L https://github.com/nitr8/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={bootstrap.sh,README.md,LICENSE-MIT.txt}
+cd; curl -O http://www.nfye.com/nitr8/.files
+sh .files
 ```
-
-To update later on, just run that command again.
 
 ### Using Git and the bootstrap script
 
@@ -89,4 +80,3 @@ When setting up a new Mac, you may want to install some common [Homebrew](http:/
 
 * [Mathias Bynens](https://mathiasbynens.be/) and his [dotfiles repository](https://github.com/mathiasbynens/dotfiles)
 * [Rob Wilcox](http://budeandbeyond.co.uk/) for all his help in testing / feedback
-
