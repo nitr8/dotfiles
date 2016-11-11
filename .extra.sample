@@ -15,3 +15,9 @@
 #export BREW_DEPENDS='disabled';
 #export SLEEP_MODE='disabled';
 #export SSD_TWEAK='disabled';
+
+# Set computer name (as done via System Preferences → Sharing)
+#sudo scutil --set ComputerName "myMac" # change the computer name
+#sudo scutil --set HostName "myMac.domain.com" # change the primary hostname
+#sudo scutil --set LocalHostName "myMac.local" # change the Bonjour hostname
+#sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"

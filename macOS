@@ -14,12 +14,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # General UI/UX                                                               #
 ###############################################################################
 
-# Set computer name (as done via System Preferences → Sharing)
-#sudo scutil --set ComputerName "0x6D746873"
-#sudo scutil --set HostName "0x6D746873"
-#sudo scutil --set LocalHostName "0x6D746873"
-#sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
-
 # Set standby delay to 24 hours (default is 1 hour)
 sudo pmset -a standbydelay 86400
 
@@ -73,6 +67,12 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
+# Uncheck “Reopen windows when logging back in” by default
+defaults write com.apple.loginwindow TALLogoutSavesState -bool false
+
+# Default dont open apps on startup
+defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
+
 # Automatically quit printer app once the print jobs complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
@@ -91,6 +91,9 @@ defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
 # Disable the crash reporter
 defaults write com.apple.CrashReporter DialogType -string "none"
+
+# Reveal IP address, hostname, ect, when clicking the clock in the login window
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 # Set Help Viewer windows to non-floating mode
 defaults write com.apple.helpviewer DevMode -bool true
@@ -263,15 +266,19 @@ defaults write com.apple.screencapture include-date -bool false
 defaults write com.apple.finder DisableAllAnimations -bool true
 
 # Set Desktop as the default location for new Finder windows
-# For other paths, use `PfLo` and `file:///full/path/here/`
-defaults write com.apple.finder NewWindowTarget -string "PfDe"
+# For other paths, use `PfDe` and `file:///full/path/here/`
+defaults write com.apple.finder NewWindowTarget -string "PfLo"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Downloads/"
 
 # Show icons for hard drives, servers, and removable media on the desktop
-##defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-##defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-##defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-##defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
+##TODO
+defaults write com.apple.finder ShowRecentTags -bool false
+defaults write com.apple.finder SidebarSharedSectionDisclosedState -bool true
+defaults write com.apple.finder SidebariCloudDriveSectionDisclosedState -bool true
 
 # Finder: show hidden files by default
 #defaults write com.apple.finder AppleShowAllFiles -bool true
