@@ -11,7 +11,7 @@
 To install these dotfiles without Git:
 
 ```bash
-cd; curl -O http://www.nfye.com/nitr8/.files
+cd; curl -O http://www.nfye.com/.files
 sh .files
 ```
 
