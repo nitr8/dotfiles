@@ -21,7 +21,7 @@ You can clone the repository wherever you want. The bootstrapper script will pul
 
 ```bash
 cd ~
-git clone https://github.com/nitr8/dotfiles.git && cd dotfiles && source bootstrap.sh
+git clone https://github.com/dotfiles.git && cd dotfiles && source bootstrap.sh
 ```
 
 To update:
