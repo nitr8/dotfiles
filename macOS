@@ -14,11 +14,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # General UI/UX                                                               #
 ###############################################################################
 
-# Set standby delay to 24 hours (default is 1 hour)
-sudo pmset -a standbydelay 86400
-
 # Disable the sound effects on boot
-sudo nvram SystemAudioVolume=" "
+sudo nvram SystemAudioVolume=%00
 
 # Disable transparency in the menu bar and elsewhere on Yosemite
 defaults write com.apple.universalaccess reduceTransparency -bool true
@@ -98,16 +95,6 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 # Set Help Viewer windows to non-floating mode
 defaults write com.apple.helpviewer DevMode -bool true
 
-# Restart automatically if the computer freezes
-sudo systemsetup -setrestartfreeze on
-
-# Never go into computer sleep mode
-if [ -n "${SLEEP_MODE+set}" ]; then
-  echo '$SLEEP_MODE was set' to $SLEEP_MODE
-else
-	sudo systemsetup -setcomputersleep Off > /dev/null
-fi
-
 # Disable Notification Center and remove the menu bar icon
 ##launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
@@ -124,25 +111,44 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 #sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
 
 ###############################################################################
+# Power options                                                               #
+###############################################################################
+#sudo systemsetup -getsleep
+
+# Set standby delay to 4 hours (default is 1 hour)
+sudo pmset -a standbydelay 14400
+
+# Never go into sleep mode
+sudo pmset -c sleep 0
+
+# Turn display off after 60 min
+sudo pmset -c displaysleep 60
+
+# Put hard disks to sleep after 50 min no activity
+sudo pmset -c disksleep 50
+
+# Start after power failure
+sudo pmset -c autorestart 1
+
+# Restart automatically if the computer freezes
+sudo systemsetup -setrestartfreeze on
+
+###############################################################################
 # SSD-specific tweaks                                                         #
 ###############################################################################
 
-if [ -n "${SSD_TWEAK+set}" ]; then
-  echo '$SSD_TWEAK was set' to $SSD_TWEAK
-else
-	# Disable hibernation (speeds up entering sleep mode)
-	sudo pmset -a hibernatemode 0
+# Disable hibernation (speeds up entering sleep mode)
+sudo pmset -a hibernatemode 0
 
-	# Remove the sleep image file to save disk space
-	sudo rm -Rf /private/var/vm/sleepimage
-	# Create a zero-byte file instead…
-	sudo touch /private/var/vm/sleepimage
-	# …and make sure it can’t be rewritten
-	sudo chflags uchg /private/var/vm/sleepimage
+# Remove the sleep image file to save disk space
+sudo rm -Rf /private/var/vm/sleepimage
+# Create a zero-byte file instead…
+sudo touch /private/var/vm/sleepimage
+# …and make sure it can’t be rewritten
+sudo chflags uchg /private/var/vm/sleepimage
 
-	# Disable the sudden motion sensor as it’s not useful for SSDs
-	sudo pmset -a sms 0
-fi
+# Disable the sudden motion sensor as it’s not useful for SSDs
+sudo pmset -a sms 0
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
@@ -288,6 +294,7 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 # Finder: show status bar
 defaults write com.apple.finder ShowStatusBar -bool true
+defaults write com.apple.Safari ShowStatusBarInFullScreen -bool true
 
 # Finder: show path bar
 defaults write com.apple.finder ShowPathbar -bool true
@@ -826,6 +833,44 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 cp -r init/sublime.settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings 2> /dev/null
 
 ###############################################################################
+# 1Password                                                                  #
+###############################################################################
+
+# Enable 1Password Watchtower
+defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper watchtowerService -int 1
+
+# Use rich icons
+defaults write com.agilebits.onepassword-osx ShowRichIcons -int 1
+
+# Always keep 1Password mini running
+defaults write com.agilebits.onepassword-osx KeepHelperRunning -int 1
+
+# Disable "Lock when screen saver is activated"
+defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper LockOnScreenSaver -int 0
+
+# Disable "Lock on sleep"
+defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper LockOnSleep -int 0
+
+# Disable "Lock on fast user switching"
+defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper LockOnUserSwitch -int 0
+
+# Disable " Lock after computer is idle"
+defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper LockOnIdle -int 0
+
+# Set default password length to 25
+defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper PasswordLength -int 25
+
+# Use a minimum of 5 digits
+defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper PasswordDigits -int 5
+
+# Use a minimum of 5 symbols
+defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper PasswordSymbols -int 5
+
+defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper
+defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper
+
+
+###############################################################################
 # Office 2016                                                                 #
 ###############################################################################
 
@@ -879,6 +924,27 @@ defaults write com.apple.menuextra.clock DateFormat -string "EEE h:mm a"
 
 # Stop iTunes from responding to the keyboard media keys
 launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+
+# Enable remote login
+sudo systemsetup -setremotelogin on
+
+###############################################################################
+# SECURITY
+###############################################################################
+# Please see http://krypted.com/mac-security/command-line-firewall-management-in-os-x-10-10/
+
+# Enable firewall
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+
+# Configure the firewall to block all incoming traffic
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall on
+# OR
+# Disable automatically receive incoming connections
+#sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned off
+#sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp off
+
+# Turn On Stealth Mode
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
 
 ###############################################################################
 # brew.sh dependencies                                                        #

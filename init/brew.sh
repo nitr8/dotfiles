@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Disable analytics
+ brew analytics off
+
 # Make sure we’re using the latest.
 brew update
 
