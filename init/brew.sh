@@ -3,13 +3,40 @@
 # Install if we don't have it
 if test ! $(which brew); then
 	echo "Installing homebrew..."
+
+INSTALL_PATH="${HOME}/Downloads"
+INSTALL_PATH_XCODE="${INSTALL_PATH}/apple.com"
+
+  if [ ! -d "${INSTALL_PATH_XCODE}" ]; then
+    mkdir -p "${INSTALL_PATH_XCODE}"
+  fi
+
+  if [ ! -f "${INSTALL_PATH_XCODE}/CLTools_Executables.pkg" ] \
+    || [ ! -f "${INSTALL_PATH_XCODE}/DevSDK_OSX1012.pkg" ]; then
+    cd "${INSTALL_PATH_XCODE}" \
+      && curl --compressed --location --silent \
+      "https://swscan.apple.com/content/catalogs/others/index-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog.gz" \
+      | sed -n \
+        -e "s/^.*<string>\(.*CLTools_Executables.pkg\).*/\1/p" \
+        -e "s/^.*<string>\(.*DevSDK_OSX1012.pkg\).*/\1/p" \
+      | tail -n 2 \
+      | xargs -L 1 curl --compressed --location --remote-name
+  fi
+
+  if [ -f "${INSTALL_PATH_XCODE}/CLTools_Executables.pkg" ] \
+    && [ -f "${INSTALL_PATH_XCODE}/DevSDK_OSX1012.pkg" ]; then
+    sudo installer -pkg "${INSTALL_PATH_XCODE}/CLTools_Executables.pkg" -target /
+    sudo installer -pkg "${INSTALL_PATH_XCODE}/DevSDK_OSX1012.pkg" -target /
+  fi
+
+
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	# Disable analytics
 	brew analytics off
+	# Update homebrew recipes
+	brew update
+	brew doctor
 fi
-
-# Update homebrew recipes
-brew update
 
 # taps
 brew tap caskroom/cask

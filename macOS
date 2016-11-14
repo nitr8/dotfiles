@@ -119,7 +119,7 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 sudo pmset -a standbydelay 14400
 
 # Never go into sleep mode
-sudo pmset -c sleep 0
+##sudo pmset -c sleep 0
 
 # Turn display off after 60 min
 sudo pmset -c displaysleep 60
@@ -954,8 +954,8 @@ if [ -n "${BREW_DEPENDS+set}" ]; then
   #echo '$BREW_DEPENDS was set' to $BREW_DEPENDS
   rm -Rf init/
 else
-	echo chmod 755 init/brew.sh && init/brew.sh
-	echo rm -Rf init/
+	echo chmod 755 init/brew.sh && init/brew.sh > ~/brew.log
+	#echo rm -Rf init/
 fi
 
 ###############################################################################
