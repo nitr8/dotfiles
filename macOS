@@ -870,10 +870,6 @@ defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper PasswordDigits -i
 # Use a minimum of 5 symbols
 defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper PasswordSymbols -int 5
 
-defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper
-defaults write 2BUA8C4S2C.com.agilebits.onepassword-osx-helper
-
-
 ###############################################################################
 # Office 2016                                                                 #
 ###############################################################################
