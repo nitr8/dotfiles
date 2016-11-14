@@ -109,6 +109,9 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 #rm -rf ~/Library/Application Support/Dock/desktoppicture.db
 #sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
 #sudo ln -s /path/to/your/image /System/Library/CoreServices/DefaultDesktop.jpg
+sudo cp -r ~/init/default.png /Library/Caches/com.apple.desktop.admin.png
+sudo cp -r ~/init/default.png /Library/Desktop\ Pictures/3D\ Colorful\ Spiral.png
+osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Library/Desktop Pictures/3D Colorful Spiral.png"'
 
 ###############################################################################
 # Power options                                                               #
