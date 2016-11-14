@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-# Install if we don't have it
+LF="tee -a ${HOME}/brew.log"
+LOG="echo $(date +"%T") - "
+
+$LOG "Install homebrew if we don't have it" | $LF
 if test ! $(which brew); then
-	echo "Installing homebrew..."
+  $LOG "Installing homebrew..." | $LF
 
 INSTALL_PATH="${HOME}/Downloads"
 INSTALL_PATH_XCODE="${INSTALL_PATH}/apple.com"
@@ -30,62 +33,56 @@ INSTALL_PATH_XCODE="${INSTALL_PATH}/apple.com"
   fi
 
 
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	# Disable analytics
-	brew analytics off
-	# Update homebrew recipes
-	brew update
-	brew doctor
+  $LOG "Fetching and installing homebrew"|  $LF
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+  $LOG "Disable analytics" | $LF
+  brew analytics off 2>&1 | $LF
+
+  $LOG "Update homebrew recipes" | $LF
+  brew update 2>&1 | $LF
+  brew doctor 2>&1 | $LF
+
 fi
 
-# taps
-brew tap caskroom/cask
-brew tap caskroom/fonts
-brew tap caskroom/versions
+$LOG "Tapping casks" | $LF
+brew tap caskroom/cask 2>&1 | $LF
+brew tap caskroom/fonts 2>&1 | $LF
+brew tap caskroom/versions 2>&1 | $LF
 
 # Upgrade any formulas.
-brew upgrade
+brew upgrade 2>&1 | $LF
 
-# Formulas
+$LOG "installing formulas..." | $LF
 formulas=(
-	coreutils
-	findutils
-	dark-mode
-	lynx
-	nmap
-	mas
-	tree
+  coreutils
+  findutils
+  dark-mode
+  lynx
+  nmap
+  mas
+  tree
+  wget
 )
+brew install ${formulas[@]} 2>&1 | $LF
 
-echo "installing formulas..."
-brew install ${formulas[@]}
-
-brew install wget --with-iri
-brew install vim --with-override-system-vi
-brew install homebrew/dupes/screen
-
-# Applications
+$LOG "installing Applications..." | $LF
 apps=(
-	1password
-	sublime-text
+  1password
+  sublime-text
 )
-# Install apps to /Applications - default is: /Users/$user/Applications
-echo "installing Applications..."
-brew cask install --appdir="/Applications" ${apps[@]}
-#export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
+brew cask install --appdir="/Applications" ${apps[@]} 2>&1 | $LF
 #brew cask alfred link
 
-# fonts
+$LOG "installing fonts..." | $LF
 fonts=(
   font-m-plus
   font-clear-sans
   font-roboto
 )
+brew cask install ${fonts[@]} 2>&1 | $LF
 
-# install fonts
-echo "installing fonts..."
-brew cask install ${fonts[@]}
-
-# Remove outdated versions from the cellar.
-brew cleanup && brew cask cleanup
+$LOG "Remove outdated versions from the cellar" | $LF
+brew cleanup -s 2>&1 | $LF
+brew cask cleanup 2>&1 | $LF
+$LOG "DONE!..." | $LF
