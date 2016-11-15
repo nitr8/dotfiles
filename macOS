@@ -928,6 +928,12 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/nul
 # Enable remote login
 sudo systemsetup -setremotelogin on
 
+# Disable the Game Center (gamed) Launch Agent
+launchctl unload /System/Library/LaunchAgents/com.apple.gamed.plist
+
+# Disable Game Center (gamed)
+defaults write com.apple.gamed Disabled -bool true
+
 ###############################################################################
 # SECURITY
 ###############################################################################
