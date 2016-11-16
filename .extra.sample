@@ -12,6 +12,7 @@
 #export SET_LOCALE='en_GB';
 #export SET_UNITS='Inches';
 #export SET_TIMEZONE='Europe/London';
+#export INSTALL_APPS='disabled';
 #export BREW_DEPENDS='disabled';
 #export SLEEP_MODE='disabled';
 #export SSD_TWEAK='disabled';

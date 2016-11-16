@@ -66,13 +66,15 @@ formulas=(
 )
 brew install ${formulas[@]} 2>&1 | $LF
 
-$LOG "installing Applications..." | $LF
-apps=(
-  1password
-  sublime-text
-)
-brew cask install --appdir="/Applications" ${apps[@]} 2>&1 | $LF
-#brew cask alfred link
+if [ -n "${SET_LOCALE+set}" ]; then
+  $LOG "installing Applications..." | $LF
+  apps=(
+    1password
+    sublime-text
+  )
+  brew cask install --appdir="/Applications" ${apps[@]} 2>&1 | $LF
+  #brew cask alfred link
+fi
 
 $LOG "installing fonts..." | $LF
 fonts=(
