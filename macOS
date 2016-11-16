@@ -934,6 +934,12 @@ launchctl unload /System/Library/LaunchAgents/com.apple.gamed.plist
 # Disable Game Center (gamed)
 defaults write com.apple.gamed Disabled -bool true
 
+# create directory structure
+if [ ! -d ~/projects/arb ]; then
+  echo no projects
+  mkdir -p ~/projects/arb
+fi
+
 ###############################################################################
 # SECURITY
 ###############################################################################
