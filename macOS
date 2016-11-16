@@ -806,6 +806,24 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 ##defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
 
 ###############################################################################
+# Apple Remote Desktop                                                        #
+###############################################################################
+
+#Hide warnings for exit
+defaults write com.apple.RemoteDesktop dontWarnActiveTasks -bool true
+defaults write com.apple.RemoteDesktop dontWarnScheduledTasks -bool true
+defaults write com.apple.RemoteDesktop dontWarnSendSessionsActive -bool true
+defaults write com.apple.RemoteDesktop dontWarnUnreadMessages -bool true
+
+# Disable crypto, speed things up a bit
+defaults write com.apple.RemoteDesktop encryptCopy -bool false
+defaults write com.apple.RemoteDesktop encryptInstall -bool false
+defaults write com.apple.RemoteDesktop useEncryptedTunnel -bool false
+
+# Disable remote user control, les laggy
+defaults write com.apple.RemoteDesktop absoluteControl -bool true
+
+###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
 ###############################################################################
 
