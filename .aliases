@@ -157,3 +157,9 @@ alias path='echo -e ${PATH//:/\\n}'
 if [ -d "/Applications/Sublime Text.app" ]; then
 	alias sl="open -a /Applications/Sublime\ Text.app"
 fi
+
+Docker cleaup
+# Delete all containers
+alias drmc="docker rm $(docker ps -a -q)"
+# Delete all images
+alias drmi="docker rmi $(docker images -q)"
