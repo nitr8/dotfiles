@@ -56,7 +56,8 @@ alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date
 
 # Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 #alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup'
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; curl -s https://gist.githubusercontent.com/nitr8/66a891cf1cade7a8c997fbc71baa5e47/raw/47f647a7d5d504537f7b6217cf12972faa6e3b79/cask_upgrade.sh | bash /dev/stdin
+'
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"

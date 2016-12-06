@@ -70,7 +70,30 @@ if [ -n "${SET_LOCALE+set}" ]; then
   $LOG "installing Applications..." | $LF
   apps=(
     1password
+    alfred
+    appcleaner
+    calibre
+    devonthink-pro-office
+    daisydisk
+    docker-beta
+    dropbox
+    google-chrome-beta
+    github-desktop
+    kaleidoscope
+    kitematic
+    lingon-x
+    little-snitch
+    microsoft-lync
+    microsoft-office
+    mysqlworkbench
+    royal-tsx
+    skype
+    sonos
+    soundmate
     sublime-text
+    teamviewer
+    tunnelblick
+    visual-studio-code-insiders
   )
   brew cask install --appdir="/Applications" ${apps[@]} 2>&1 | $LF
   #brew cask alfred link
@@ -78,8 +101,9 @@ fi
 
 $LOG "installing fonts..." | $LF
 fonts=(
-  font-m-plus
   font-clear-sans
+  font-consolas-for-powerline
+  font-m-plus
   font-roboto
 )
 brew cask install ${fonts[@]} 2>&1 | $LF
