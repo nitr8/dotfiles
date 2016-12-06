@@ -83,11 +83,13 @@ if [ -n "${SET_LOCALE+set}" ]; then
     kitematic
     lingon-x
     little-snitch
+    oversight
     microsoft-lync
     microsoft-office
     mysqlworkbench
     royal-tsx
     skype
+    slack-beta
     sonos
     soundmate
     sublime-text
