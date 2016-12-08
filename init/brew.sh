@@ -110,6 +110,31 @@ fonts=(
 )
 brew cask install ${fonts[@]} 2>&1 | $LF
 
+$LOG "installing PHP CodeSniffer (PHPCS) and PHP Mess Detector (PHPMD)..." | $LF
+# Make a bin directory in your home folder, this will stop things being overwritten
+mkdir ~/bin
+cd ~/bin
+ 
+# Get the latest versions from git, make sure you have git installed
+git clone https://github.com/squizlabs/PHP_CodeSniffer.git phpcs
+git clone git://github.com/phpmd/phpmd.git
+ 
+# install composer into your bin folder
+curl -s http://getcomposer.org/installer | php
+ 
+# add composer, phpcs and phpmd to your path
+sudo ln -s ~/bin/phpcs/scripts/phpcs /usr/local/bin/phpcs
+sudo ln -s ~/bin/phpmd/src/bin/phpmd /usr/local/bin/phpmd
+sudo ln -s ~/bin/composer.phar /usr/local/bin/composer
+ 
+# configure phpmd
+cd ~/bin/phpmd
+composer install
+
+$LOG "PHP 5.3 to 7.1 for macOS..." | $LF
+curl -s https://php-osx.liip.ch/install.sh | bash -s 7.1
+###
+
 $LOG "Remove outdated versions from the cellar" | $LF
 brew cleanup -s 2>&1 | $LF
 brew cask cleanup 2>&1 | $LF
