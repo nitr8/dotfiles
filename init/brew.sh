@@ -92,6 +92,7 @@ if [ -n "${SET_LOCALE+set}" ]; then
     slack-beta
     sonos
     soundmate
+    stretchly
     sublime-text
     teamviewer
     tunnelblick
