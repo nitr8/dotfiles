@@ -160,6 +160,6 @@ fi
 
 # Docker cleaup
 # Delete all containers
-alias drmc="docker rm $(docker ps -a -q)"
+#alias drmc="docker rm $(docker ps -a -q)"
 # Delete all images
-alias drmi="docker rmi $(docker images -q)"
+#alias drmi="docker rmi $(docker images -q)"
