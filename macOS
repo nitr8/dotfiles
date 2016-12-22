@@ -949,9 +949,9 @@ launchctl unload /System/Library/LaunchAgents/com.apple.gamed.plist
 defaults write com.apple.gamed Disabled -bool true
 
 # create directory structure
-if [ ! -d ~/projects/arb ]; then
+if [ ! -d ~/projects ]; then
   echo no projects
-  mkdir -p ~/projects/arb
+  mkdir -p ~/projects
 fi
 
 ###############################################################################
@@ -976,13 +976,8 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
 # brew.sh dependencies                                                        #
 ###############################################################################
 
-if [ -n "${BREW_DEPENDS+set}" ]; then
-  #echo '$BREW_DEPENDS was set' to $BREW_DEPENDS
-  rm -Rf init/
-else
-	echo chmod 755 init/brew.sh && init/brew.sh > ~/brew.log
-	#echo rm -Rf init/
-fi
+chmod 755 init/brew.sh && init/brew.sh > ~/brew.log
+rm -Rf init/
 
 ###############################################################################
 # Kill affected applications                                                  #

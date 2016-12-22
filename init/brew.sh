@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#MAC_NAME="mp-odin"
+MAC_NAME="mpb-odin"
+#MAC_NAME="mb-odin"
+
 LF="tee -a ${HOME}/brew.log"
 LOG="echo $(date +"%T") - "
 
@@ -58,6 +62,7 @@ formulas=(
   coreutils
   findutils
   dark-mode
+  figlet
   lynx
   nmap
   mas
@@ -66,41 +71,36 @@ formulas=(
 )
 brew install ${formulas[@]} 2>&1 | $LF
 
-if [ -n "${SET_LOCALE+set}" ]; then
-  $LOG "installing Applications..." | $LF
-  apps=(
-    1password
-    alfred
-    appcleaner
-    calibre
-    devonthink-pro-office
-    daisydisk
-    docker-beta
-    dropbox
-    google-chrome-beta
-    github-desktop
-    kaleidoscope
-    kitematic
-    lingon-x
-    little-snitch
-    oversight
-    microsoft-lync
-    microsoft-office
-    mysqlworkbench
-    royal-tsx
-    skype
-    slack-beta
-    sonos
-    soundmate
-    stretchly
-    sublime-text
-    teamviewer
-    tunnelblick
-    visual-studio-code-insiders
-  )
-  brew cask install --appdir="/Applications" ${apps[@]} 2>&1 | $LF
-  #brew cask alfred link
-fi
+$LOG "installing Applications..." | $LF
+apps=(
+  1password
+  alfred
+  appcleaner
+  calibre
+  devonthink-pro-office
+  daisydisk
+  docker-beta
+  dropbox
+  google-chrome-beta
+  github-desktop
+  kaleidoscope
+  kitematic
+  lingon-x
+  little-snitch
+  microsoft-lync
+  microsoft-office
+  royal-tsx
+  skype
+  slack-beta
+  sonos
+  soundmate
+  stretchly
+  sublime-text
+  teamviewer
+  tunnelblick
+  visual-studio-code-insiders
+)
+brew cask install --appdir="/Applications" ${apps[@]} 2>&1 | $LF
 
 $LOG "installing fonts..." | $LF
 fonts=(
@@ -116,27 +116,37 @@ $LOG "installing PHP CodeSniffer (PHPCS) and PHP Mess Detector (PHPMD)..." | $LF
 mkdir ~/bin
 cd ~/bin
  
-# Get the latest versions from git, make sure you have git installed
-git clone https://github.com/squizlabs/PHP_CodeSniffer.git phpcs
-git clone git://github.com/phpmd/phpmd.git
+$LOG "Get the latest versions from git, make sure you have git installed" | $LF
+git clone https://github.com/squizlabs/PHP_CodeSniffer.git phpcs 2>&1 | $LF
+git clone git://github.com/phpmd/phpmd.git 2>&1 | $LF
  
-# install composer into your bin folder
-curl -s http://getcomposer.org/installer | php
+$LOG "install composer into your bin folder" | $LF
+curl -s http://getcomposer.org/installer | php 2>&1 | $LF
  
-# add composer, phpcs and phpmd to your path
+$LOG "add composer, phpcs and phpmd to your path" | $LF
 sudo ln -s ~/bin/phpcs/scripts/phpcs /usr/local/bin/phpcs
 sudo ln -s ~/bin/phpmd/src/bin/phpmd /usr/local/bin/phpmd
 sudo ln -s ~/bin/composer.phar /usr/local/bin/composer
  
-# configure phpmd
+$LOG "configure phpmd" | $LF
 cd ~/bin/phpmd
-composer install
+composer install 2>&1 | $LF
 
 $LOG "PHP 5.3 to 7.1 for macOS..." | $LF
-curl -s https://php-osx.liip.ch/install.sh | bash -s 7.1
-###
+curl -s https://php-osx.liip.ch/install.sh | bash -s 7.1 2>&1 | $LF
 
 $LOG "Remove outdated versions from the cellar" | $LF
 brew cleanup -s 2>&1 | $LF
 brew cask cleanup 2>&1 | $LF
 $LOG "DONE!..." | $LF
+
+$LOG "gen motd" | $LF
+figlet $MAC_NAME >> ~/init/motd 
+sudo cp -r ~/init/motd /etc/
+
+$LOG "Set computer name (as done via System Preferences -> Sharing)" | $LF
+sudo scutil --set ComputerName $MAC_NAME
+sudo scutil --set HostName $MAC_NAME
+sudo scutil --set LocalHostName $MAC_NAME
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $MAC_NAME
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server ServerDescription -string "macOS"
