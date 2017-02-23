@@ -68,6 +68,9 @@ formulas=(
   mas
   tree
   wget
+  angry-ip-scanner
+  gnupg
+  node 
 )
 brew install ${formulas[@]} 2>&1 | $LF
 

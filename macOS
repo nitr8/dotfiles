@@ -954,6 +954,9 @@ if [ ! -d ~/projects ]; then
   mkdir -p ~/projects
 fi
 
+# Add sha256sum to system
+sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
+
 ###############################################################################
 # SECURITY
 ###############################################################################
